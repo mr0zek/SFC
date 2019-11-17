@@ -1,12 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Automatonymous;
-using SFC.Accounts.Features.CreateAccount.Contract;
-using SFC.Alerts;
-using SFC.Alerts.Features.CreateAlert;
 using SFC.Infrastructure;
-using SFC.Notifications.Features.SendNotification.Contract;
-using SFC.Notifications.Features.SetNotificationEmail.Contract;
 using SFC.Processes.UserRegistration.Contract;
 
 namespace SFC.Processes.UserRegistration

@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using SFC.Alerts;
-using SFC.Alerts.Features.CreateAlert;
-using SFC.Alerts.Features.GetAlert;
-using SFC.Infrastructure;
 
 namespace SFC.UserApi.Alerts
 {
@@ -16,21 +11,21 @@ namespace SFC.UserApi.Alerts
     [HttpPost]
     public IActionResult Post(PostAlertModel model)
     {
-      throw new NotImplemented();
+      throw new NotImplementedException();
       //return Created($"/api/alerts/{model.Id}", model.Id);
     }
 
     [HttpGet]
     public IActionResult Get([FromQuery] string loginName)
     {
-      throw new NotImplemented();
+      throw new NotImplementedException();
       //return Json(...);
     }
 
     [HttpGet("{id}")]
     public IActionResult Get([FromRoute] string id, [FromQuery] string loginName)
     {
-      throw new NotImplemented();
+      throw new NotImplementedException();
       //return Json(...);
     }
   }
