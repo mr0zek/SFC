@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SFC.Alerts;
-using SFC.Alerts.Features.GetAlert;
 
 namespace SFC.UserApi.Alerts
 {

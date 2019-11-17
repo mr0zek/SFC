@@ -6,7 +6,7 @@ namespace SFC.UserApi.Alerts
   {
     public PostAlertModelValidator()
     {
-      // validation rules goes here
+      RuleFor(f => f.ZipCode).NotNull().NotEmpty();
     }
   }
 }

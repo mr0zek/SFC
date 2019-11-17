@@ -38,19 +38,19 @@ namespace SFC
         .AddMvc(opt =>
         {
           // Enable fluent validation
-          // opt.Filters.Add(typeof(FluentValidationActionFilter));
+          opt.Filters.Add(typeof(FluentValidationActionFilter));
         })
         .AddApplicationPart(typeof(AutofacUserApiModule).Assembly)
         .AddApplicationPart(typeof(AutofacAdminApiModule).Assembly)
         .AddControllersAsServices()
-        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+        
         // Enable fluent validation
-        //.AddFluentValidation(fvc =>
-        //{
-        //  fvc.RegisterValidatorsFromAssemblyContaining<AutofacUserApiModule>();
-        //  fvc.RegisterValidatorsFromAssemblyContaining<AutofacAdminApiModule>();
-        //});
+        .AddFluentValidation(fvc =>
+        {
+          fvc.RegisterValidatorsFromAssemblyContaining<AutofacUserApiModule>();
+          fvc.RegisterValidatorsFromAssemblyContaining<AutofacAdminApiModule>();
+        });
 
       services.AddLogging(loggingBuilder =>
       {
