@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SFC.Alerts;
+using SFC.Alerts.Features.CreateAlert;
+using SFC.Alerts.Features.GetAlert;
+using SFC.Infrastructure;
 
 namespace SFC.UserApi.Alerts
 {
-  //[Route("api/v{version:apiVersion}/[controller]")]
-  [Route("api/[controller]")]
+  [Route("api/v{version:apiVersion}/[controller]")]
   [ApiController]
   public class AlertsController : Controller
   {

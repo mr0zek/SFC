@@ -65,12 +65,12 @@ namespace SFC
         c.SwaggerDoc("v1", new Info { Title = "SmogFightClub API", Version = "v1" });
       });
 
-      // services.AddApiVersioning(o =>
-      // {
-      //   o.AssumeDefaultVersionWhenUnspecified = true;
-      //   o.ReportApiVersions = true;
-      //   o.DefaultApiVersion = new ApiVersion(1, 0);
-      // });
+      services.AddApiVersioning(o =>
+      {
+        o.AssumeDefaultVersionWhenUnspecified = true;
+        o.ReportApiVersions = true;
+        o.DefaultApiVersion = new ApiVersion(1, 0);
+      });
 
       // Ioc
       var builder = new ContainerBuilder();
