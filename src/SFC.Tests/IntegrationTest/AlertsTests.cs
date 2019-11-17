@@ -24,10 +24,26 @@ namespace SFC.Tests.IntegrationTest
       });
 
 
+      PostAlertModel postAlert = new PostAlertModel()
+      {
+        Id = Guid.NewGuid().ToString(),
+        AdresLine1 = "ul Szkolna 12",
+        AdresLine2 = "Gniezno",
+        ZipCode = "12-345",
+        LoginName = "ala.makotowska"
+      };
+
       // Act
-      //await RestClient.For<IAlertsApi>(_url).PostAlert(postAlert);
+      await RestClient.For<IAlertsApi>(_url).PostAlert(postAlert);
 
       // Assert
+      GetAlertModel getAlert = await RestClient.For<IAlertsApi>(_url).GetAlert(postAlert.Id, "ala.makotowska");
+
+      Assert.Equal(postAlert.AdresLine1, getAlert.AdresLine1);
+      Assert.Equal(postAlert.AdresLine2, getAlert.AdresLine2);
+      Assert.Equal(postAlert.Id, getAlert.Id);
+      Assert.Equal(postAlert.ZipCode, getAlert.ZipCode);
+      Assert.True(getAlert.Active);
       
     }
 

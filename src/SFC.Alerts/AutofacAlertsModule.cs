@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Autofac;
-using SFC.Alerts.Command;
-using SFC.Alerts.Query;
 using SFC.Infrastructure;
 
 namespace SFC.Alerts
@@ -12,8 +10,6 @@ namespace SFC.Alerts
   {
     protected override void Load(ContainerBuilder builder)
     {
-      builder.RegisterType<AlertQuery>().AsImplementedInterfaces();
-
       builder.RegisterAssemblyTypes(GetType().Assembly)
         .AsClosedTypesOf(typeof(ICommandHandler<>)).AsImplementedInterfaces()
         .InstancePerLifetimeScope();
