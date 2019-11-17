@@ -8,9 +8,6 @@ namespace SFC.UserApi
   {
     protected override void Load(ContainerBuilder builder)
     {
-      builder.RegisterType<AlertRepository>()
-        .AsImplementedInterfaces();
-
       builder.RegisterAssemblyTypes(GetType().Assembly)
         .AsClosedTypesOf(typeof(ICommandHandler<>)).AsImplementedInterfaces()
         .InstancePerLifetimeScope();

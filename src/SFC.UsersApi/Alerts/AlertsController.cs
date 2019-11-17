@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SFC.Alerts;
+using SFC.Alerts.Api;
+using SFC.Infrastructure;
+using Alert = SFC.Alerts.Alert;
 
 namespace SFC.UserApi.Alerts
 {
@@ -6,17 +12,19 @@ namespace SFC.UserApi.Alerts
   [ApiController]
   public class AlertsController : Controller
   {
-    private IAlertRepository _alertRepository;
+    private readonly IAlertQuery _alertQuery;
+    private readonly ICommandBus _commandBus;
 
-    public AlertsController(IAlertRepository alertRepository)
+    public AlertsController(IAlertQuery alertQuery, ICommandBus commandBus)
     {
-      _alertRepository = alertRepository;
+      _alertQuery = alertQuery;
+      _commandBus = commandBus;
     }
 
     [HttpPost]
     public IActionResult Post(PostAlertModel model)
     {
-      _alertRepository.Add(new Alert(model.Id, model.AdresLine1, model.AdresLine2, model.ZipCode, model.LoginName));
+      _commandBus.Send(new CreateAlertCommand(model.Id, model.AdresLine1, model.AdresLine2, model.ZipCode, model.LoginName));
 
       return Created($"/api/alerts/{model.Id}", model.Id);
     }
@@ -24,13 +32,13 @@ namespace SFC.UserApi.Alerts
     [HttpGet]
     public IActionResult Get([FromQuery] string loginName)
     {
-      return Json(_alertRepository.GetAll(loginName));
+      return Json(_alertQuery.GetAll(loginName));
     }
 
     [HttpGet("{id}")]
     public IActionResult Get([FromRoute] string id, [FromQuery] string loginName)
     {
-      return Json(_alertRepository.Get(id, loginName));
+      return Json(_alertQuery.Get(id, loginName));
     }
   }
 }

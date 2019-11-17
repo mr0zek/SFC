@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SFC.UserApi.Alerts
+namespace SFC.Alerts
 {
   class AlertRepository : IAlertRepository
   {

@@ -1,5 +1,5 @@
 ﻿
-namespace SFC.UserApi.Alerts
+namespace SFC.Alerts
 {
   public class Alert
   {
@@ -18,6 +18,11 @@ namespace SFC.UserApi.Alerts
       ZipCode = zipCode;
       LoginName = loginName;
       Active = true;
+    }
+
+    public Api.Alert ToAlert()
+    {
+      return new Api.Alert(Id, AdresLine1, AdresLine2, ZipCode, LoginName);
     }
   }
 }

@@ -6,7 +6,7 @@ namespace SFC.Alerts.Api
 {
   public interface IAlertQuery
   {
-    //Alert Get(string id, string loginName);
-    //IEnumerable<Alert> GetAll(string loginName);
+    Alert Get(string id, string loginName);
+    IEnumerable<Alert> GetAll(string loginName);
   }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-  
-namespace SFC.UserApi.Alerts
+
+namespace SFC.Alerts
 {
   public interface IAlertRepository
   {
