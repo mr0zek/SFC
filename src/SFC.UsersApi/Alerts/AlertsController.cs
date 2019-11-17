@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using SFC.Alerts;
-using SFC.Alerts.Features.CreateAlert;
-using SFC.Alerts.Features.GetAlert;
-using SFC.Infrastructure;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace SFC.UserApi.Alerts
 {
