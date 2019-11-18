@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SFC.Accounts.Api;
 using SFC.Accounts.Features.AccountQuery;
-using SFC.Accounts.Features.AccountQuery.Contract;
 using SFC.Accounts.Features.CreateAccount;
 
 namespace SFC.Accounts.Infrastructure
 {
-  class AccountsRepository : IAccountsPerspective, IAccountRepository
+  class AccountsRepository : IAccountsQuery, IAccountRepository
   {
     private static readonly List<string> _items = new List<string>();
 

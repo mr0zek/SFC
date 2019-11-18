@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Autofac;
 using RestEase;
+using SFC.Alerts.Api;
 using SFC.Infrastructure;
 using SFC.Tests.IntegrationTest.Mocks;
 using SFC.Tests.IntegrationTest.UserApi;
@@ -18,8 +20,10 @@ namespace SFC.Tests.IntegrationTest
     public async void Post_on_alert_resource_should_create_alert_when_not_exists()
     {
       // Setup
+      TestEventBus testEventBus = new TestEventBus();
       Bootstrap.Run(new string[0], builder =>
       {
+        builder.RegisterInstance(testEventBus).AsImplementedInterfaces();
         builder.RegisterType<TestSmtpClient>().AsImplementedInterfaces();
       });
 
@@ -44,7 +48,7 @@ namespace SFC.Tests.IntegrationTest
       Assert.Equal(postAlert.Id, getAlert.Id);
       Assert.Equal(postAlert.ZipCode, getAlert.ZipCode);
       Assert.True(getAlert.Active);
-      
+      Assert.True(testEventBus.PublishedEvents.OfType<AlertCreatedEvent>().Any());
     }
 
     [Fact]

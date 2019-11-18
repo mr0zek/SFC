@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace SFC.Infrastructure
 {
-  public class Bus : ICommandBus, IEventBus, IQuery
+  public class Bus : ICommandBus, IEventBus
   {
     private readonly IComponentContext _container;
     private readonly ILogger _logger;
@@ -44,20 +44,6 @@ namespace SFC.Infrastructure
         eventHandler.Handle(@event);
       }
 
-    }
-
-    public TQueryResponse Query<TQueryResponse, TQueryRequest>(TQueryRequest request)
-    {
-      try
-      {
-        IQueryHandler<TQueryResponse, TQueryRequest> queryHandler = (IQueryHandler<TQueryResponse, TQueryRequest>)_container.Resolve(typeof(IQueryHandler<TQueryResponse, TQueryRequest>));
-        return queryHandler.Handle(request);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError($"Cannot find handler {typeof(IQueryHandler<TQueryResponse, TQueryRequest>)}", ex);
-        throw;
-      }
     }
   }
 }

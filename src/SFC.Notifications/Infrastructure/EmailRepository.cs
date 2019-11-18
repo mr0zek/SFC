@@ -2,14 +2,14 @@
 using System.Data;
 using System.Data.SqlClient;
 using Dapper;
-using SFC.Notifications.Features.GetNotificationEmail;
-using SFC.Notifications.Features.SendNotification;
-using SFC.Notifications.Features.SetNotificationEmail;
+using SFC.Notifications.Api;
+using SFC.Notifications.SendNotification;
+using SFC.Notifications.SetNotificationEmail;
 
 
 namespace SFC.Notifications.Infrastructure
 {
-  class EmailRepository : IEmailReadRepository, IEmailWriteRepository, IEmailPerspective
+  class EmailRepository : IEmailReadRepository, IEmailWriteRepository, IEmailQuery
   {
     private static readonly Dictionary<string, string> _items = new Dictionary<string, string>()
     {

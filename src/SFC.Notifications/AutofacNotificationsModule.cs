@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using SFC.Infrastructure;
-using SFC.Notifications.Features.SendNotification;
 using SFC.Notifications.Infrastructure;
+using SFC.Notifications.SendNotification;
 
 namespace SFC.Notifications
 {
@@ -15,10 +15,6 @@ namespace SFC.Notifications
 
       builder.RegisterAssemblyTypes(GetType().Assembly)
         .AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces()
-        .InstancePerLifetimeScope();
-
-      builder.RegisterAssemblyTypes(GetType().Assembly)
-        .AsClosedTypesOf(typeof(IQueryHandler<,>)).AsImplementedInterfaces()
         .InstancePerLifetimeScope();
 
       builder.RegisterType<EmailRepository>()

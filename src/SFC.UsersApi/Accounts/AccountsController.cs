@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Net.Http.Headers;
-using SFC.Accounts.Features.AccountQuery.Contract;
 using SFC.Infrastructure;
-using SFC.Notifications.Features.GetNotificationEmail.Contract;
+using SFC.Notifications.Api;
+using SFC.Processes.Api;
 using SFC.Processes.UserRegistration.Contract;
 
 namespace SFC.UserApi.Accounts
@@ -20,12 +14,12 @@ namespace SFC.UserApi.Accounts
   public class AccountsController : Controller
   {
     private readonly ICommandBus _commandBus;
-    private readonly IQuery _query;
+    private readonly IEmailQuery _emailQuery;
 
-    public AccountsController(ICommandBus commandBus, IQuery query)
+    public AccountsController(ICommandBus commandBus, IEmailQuery emailQuery)
     {
       _commandBus = commandBus;
-      _query = query;
+      _emailQuery = emailQuery;
     }
 
     [HttpPost]
@@ -58,9 +52,8 @@ namespace SFC.UserApi.Accounts
     [HttpGet("{loginName}")]
     public ActionResult<GetAccountModel> GetAccount([FromRoute]string loginName)
     {
-      AccountReadModel account = _query.Query<AccountReadModel, string>(loginName);
-      GetEmailResponse response = _query.Query<GetEmailResponse, string>(account.LoginName);
-      return Json(new GetAccountModel(account.LoginName, response.Email));
+      string email = _emailQuery.GetEmail(loginName);
+      return Json(new GetAccountModel(loginName, email));
     }
   }
 }

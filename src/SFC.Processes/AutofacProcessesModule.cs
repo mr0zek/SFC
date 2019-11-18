@@ -20,10 +20,6 @@ namespace SFC.Processes
       builder.RegisterAssemblyTypes(GetType().Assembly)
         .AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces()
         .InstancePerLifetimeScope();
-
-      builder.RegisterAssemblyTypes(GetType().Assembly)
-        .AsClosedTypesOf(typeof(IQueryHandler<,>)).AsImplementedInterfaces()
-        .InstancePerLifetimeScope();
     }
   }
 }
