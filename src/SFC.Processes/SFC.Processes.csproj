@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AlertNotification\**" />
+    <EmbeddedResource Remove="AlertNotification\**" />
+    <None Remove="AlertNotification\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="Automatonymous" Version="4.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
@@ -15,10 +21,6 @@
     <ProjectReference Include="..\SFC.Alerts\SFC.Alerts.csproj" />
     <ProjectReference Include="..\SFC.Infrastructure\SFC.Infrastructure.csproj" />
     <ProjectReference Include="..\SFC.Notifications\SFC.Notifications.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="AlertNotification\" />
   </ItemGroup>
 
 </Project>

@@ -4,13 +4,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using SFC.Notifications.Features.NotificationQuery;
-using SFC.Notifications.Features.NotificationQuery.Contract;
-using SFC.Notifications.Features.SendNotification;
+using SFC.Notifications.Api;
+using SFC.Notifications.SendNotification;
 
 namespace SFC.Notifications.Infrastructure
 {
-  class NotificationRepository : INotificationRepository, INotificationQueryRepository
+  class NotificationRepository : INotificationRepository, INotificationQuery
   {
     private static readonly List<Notification> _items = new List<Notification>();
 

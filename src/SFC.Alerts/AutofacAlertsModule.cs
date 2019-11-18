@@ -22,10 +22,6 @@ namespace SFC.Alerts
         .AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces()
         .InstancePerLifetimeScope();
 
-      builder.RegisterAssemblyTypes(GetType().Assembly)
-        .AsClosedTypesOf(typeof(IQueryHandler<,>)).AsImplementedInterfaces()
-        .InstancePerLifetimeScope();
-
       // don't forget to register AlertRepository
       // builder.RegisterType<AlertRepository>().AsImplementedInterfaces();
     }

@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Automatonymous;
+using SFC.Alerts;
 using SFC.Infrastructure;
+using SFC.Processes.Api;
 using SFC.Processes.UserRegistration.Contract;
 
 namespace SFC.Processes.UserRegistration

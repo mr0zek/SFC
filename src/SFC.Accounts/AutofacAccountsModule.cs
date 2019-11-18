@@ -16,11 +16,7 @@ namespace SFC.Accounts
         .AsClosedTypesOf(typeof(IEventHandler<>)).AsImplementedInterfaces()
         .InstancePerLifetimeScope();
 
-      builder.RegisterAssemblyTypes(GetType().Assembly)
-        .AsClosedTypesOf(typeof(IQueryHandler<,>)).AsImplementedInterfaces()
-        .InstancePerLifetimeScope();
-
-      builder.RegisterType<AccountsRepository>().AsImplementedInterfaces();
+      builder.RegisterType<AccountRepository>().AsImplementedInterfaces();
     }
   }
 }
