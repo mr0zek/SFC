@@ -3,7 +3,7 @@
 namespace SFC.AdminApi.Dashboard
 {
   [ApiVersion("1.0")]
-  [Route("api/[controller]")]
+  [Route("api/v{version:apiVersion}/[controller]")]
   [ApiController]
   public class DashboardController : Controller
   {

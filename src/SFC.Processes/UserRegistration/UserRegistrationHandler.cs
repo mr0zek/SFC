@@ -1,6 +1,5 @@
 ﻿using Automatonymous;
 using SFC.Accounts.Api;
-using SFC.Accounts.Features.AccountQuery;
 using SFC.Infrastructure;
 using SFC.Processes.Api;
 using SFC.Processes.UserRegistration.Contract;

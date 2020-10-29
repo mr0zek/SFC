@@ -1,7 +1,7 @@
-﻿using SFC.Accounts.Features.CreateAccount.Contract;
+﻿using SFC.Accounts.Api;
 using SFC.Infrastructure;
 
-namespace SFC.Accounts.Features.CreateAccount
+namespace SFC.Accounts.CreateAccount
 {
   class CreateAccountHandler : ICommandHandler<CreateAccountCommand>
   {

@@ -1,6 +1,4 @@
-﻿using SFC.Accounts.Api;
-
-namespace SFC.Accounts.Features.AccountQuery
+﻿namespace SFC.Accounts.Api
 {
   public interface IAccountsQuery
   {

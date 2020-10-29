@@ -1,25 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SFC.Accounts.Features.AccountQuery.Contract;
 using SFC.Infrastructure;
-using SFC.Notifications.Api;
-using SFC.Processes.Api;
-using SFC.Processes.UserRegistration.Contract;
+using SFC.Notifications.Contract;
+using SFC.Processes.Contract;
 
 namespace SFC.UserApi.Accounts
 {
   [ApiVersion("1.0")]
-  [Route("api/[controller]")]
+  [Route("api/v{version:apiVersion}/[controller]")]
   [ApiController]
   public class AccountsController : Controller
   {
     private readonly ICommandBus _commandBus;
-    private readonly IEmailQuery _emailQuery;
+    private readonly IQueryBus _query;
 
-    public AccountsController(ICommandBus commandBus, IEmailQuery emailQuery)
+    public AccountsController(ICommandBus commandBus, IQueryBus query)
     {
       _commandBus = commandBus;
-      _emailQuery = emailQuery;
+      _query = query;
     }
 
     [HttpPost]
@@ -39,7 +40,7 @@ namespace SFC.UserApi.Accounts
           Password = model.Password
         });
       }
-      catch (LoginNameAlreadyUsedException)
+      catch (ConfirmUserCommand.LoginNameAlreadyUsedException)
       {
         var mds = new ModelStateDictionary();
         mds.AddModelError("loginName", "Already exists");
@@ -52,8 +53,9 @@ namespace SFC.UserApi.Accounts
     [HttpGet("{loginName}")]
     public ActionResult<GetAccountModel> GetAccount([FromRoute]string loginName)
     {
-      string email = _emailQuery.GetEmail(loginName);
-      return Json(new GetAccountModel(loginName, email));
+      var account = _query.Query<GetAccountQuery.Response, GetAccountQuery.Request> (new GetAccountQuery.Request(loginName));
+      var response = _query.Query<GetEmailQuery.Response, GetEmailQuery.Request>(new GetEmailQuery.Request(account.LoginName));
+      return Json(new GetAccountModel(account.LoginName, response.Email));
     }
   }
 }

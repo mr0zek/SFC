@@ -6,7 +6,7 @@ using Dapper;
 
 namespace SFC.AdminApi.SearchableDashboard
 {
-  class SearchableDashboardPerspective : ISearchabelDashboardPerspective
+  class SearchableDashboardPerspective : IWriteDashboardPerspective, ISearchabelDashboardPerspective
   {
     private static readonly List<SearchableDashboardEntry> _items = new List<SearchableDashboardEntry>();
 

@@ -1,0 +1,29 @@
+@startuml
+
+skinparam component rectangle
+
+/' clients '/
+component SmogSensor
+actor User
+actor Admin
+
+/' system '/
+component SmogFightClub
+
+/' needed resources '/
+component GIOS
+component MailServer
+
+/' dependencies '/
+
+/' incomming '/
+SmogSensor --> SmogFightClub : Register measurements
+User --> SmogFightClub : Register account, create alerts, register sensors
+Admin --> SmogFightClub : View dashboards
+
+/' outgoing '/
+SmogFightClub --> GIOS
+SmogFightClub --> MailServer
+
+
+@enduml

@@ -2,43 +2,48 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using SFC.Alerts;
-using SFC.Alerts.Api;
+using SFC.Alerts.Contract;
 using SFC.Infrastructure;
-using Alert = SFC.Alerts.Alert;
 
 namespace SFC.UserApi.Alerts
 {
-  [Route("api/v{version:apiVersion}/[controller]")]
+  [ApiVersion("1.0")]
+  [Route("api/v1.0/[controller]")]
   [ApiController]
   public class AlertsController : Controller
   {
-    private readonly IAlertQuery _alertQuery;
     private readonly ICommandBus _commandBus;
+    private readonly IQueryBus _query;
 
-    public AlertsController(IAlertQuery alertQuery, ICommandBus commandBus)
+    public AlertsController(ICommandBus commandBus, IQueryBus query)
     {
-      _alertQuery = alertQuery;
       _commandBus = commandBus;
+      _query = query;
     }
 
     [HttpPost]
     public IActionResult Post(PostAlertModel model)
     {
-      _commandBus.Send(new CreateAlertCommand(model.Id, model.AdresLine1, model.AdresLine2, model.ZipCode, model.LoginName));
-
-      return Created($"/api/alerts/{model.Id}", model.Id);
+      _commandBus.Send(new CreateAlertCommand(
+        model.Id, 
+        model.AdresLine1, 
+        model.AdresLine2, 
+        model.ZipCode, 
+        model.LoginName));
+      
+      return Created($"/api/alerts/{model.Id}",model.Id);
     }
 
     [HttpGet]
     public IActionResult Get([FromQuery] string loginName)
     {
-      return Json(_alertQuery.GetAll(loginName));
+      return Json(_query.Query< GetAlertsQuery.Response, GetAlertsQuery.Request> (new GetAlertsQuery.Request(loginName)));
     }
 
     [HttpGet("{id}")]
     public IActionResult Get([FromRoute] string id, [FromQuery] string loginName)
     {
-      return Json(_alertQuery.Get(id, loginName));
+      return Json(_query.Query<GetAlertQuery.Response, GetAlertQuery.Request>(new GetAlertQuery.Request(id, loginName)));
     }
   }
 }

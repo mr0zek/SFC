@@ -2,9 +2,12 @@
 using SFC.Accounts;
 using SFC.AdminApi;
 using SFC.Alerts;
+using SFC.Alerts.Implementation;
 using SFC.Infrastructure;
 using SFC.Notifications;
+using SFC.Notifications.Implementation;
 using SFC.Processes;
+using SFC.Processes.Implementation;
 using SFC.UserApi;
 
 namespace SFC

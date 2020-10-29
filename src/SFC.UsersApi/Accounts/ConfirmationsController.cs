@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using SFC.Infrastructure;
-using SFC.Processes.UserRegistration.Contract;
+using SFC.Processes.Contract;
 
 namespace SFC.UserApi.Accounts
 {
   [ApiVersion("1.0")]
-  [Route("api/[controller]")]
+  [Route("api/v{version:apiVersion}/[controller]")]
   [ApiController]
   public class ConfirmationsController : Controller
   {

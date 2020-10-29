@@ -3,6 +3,6 @@
   public class DashboardEntry
   {
     public string LoginName { get; set; }
-    public int EmailsSentCount { get; set; }
+    public int AlertsCount { get; set; }
   }
 }

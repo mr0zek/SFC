@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Autofac;
+using Microsoft.Extensions.Configuration;
 using RestEase;
-using SFC.Alerts.Api;
 using SFC.Infrastructure;
 using SFC.Tests.IntegrationTest.Mocks;
 using SFC.Tests.IntegrationTest.UserApi;
@@ -20,11 +20,11 @@ namespace SFC.Tests.IntegrationTest
     public async void Post_on_alert_resource_should_create_alert_when_not_exists()
     {
       // Setup
-      TestEventBus testEventBus = new TestEventBus();
+      TestEventBus eventBus = new TestEventBus();
       Bootstrap.Run(new string[0], builder =>
       {
-        builder.RegisterInstance(testEventBus).AsImplementedInterfaces();
         builder.RegisterType<TestSmtpClient>().AsImplementedInterfaces();
+        builder.RegisterInstance(eventBus).AsImplementedInterfaces();
       });
 
 
@@ -41,14 +41,14 @@ namespace SFC.Tests.IntegrationTest
       await RestClient.For<IAlertsApi>(_url).PostAlert(postAlert);
 
       // Assert
-      GetAlertModel getAlert = await RestClient.For<IAlertsApi>(_url).GetAlert(postAlert.Id, "ala.makotowska");
+      GetAlertModel getAlert = await RestClient.For<IAlertsApi>(_url).GetAlert(postAlert.Id,"ala.makotowska");
 
       Assert.Equal(postAlert.AdresLine1, getAlert.AdresLine1);
       Assert.Equal(postAlert.AdresLine2, getAlert.AdresLine2);
       Assert.Equal(postAlert.Id, getAlert.Id);
       Assert.Equal(postAlert.ZipCode, getAlert.ZipCode);
       Assert.True(getAlert.Active);
-      Assert.True(testEventBus.PublishedEvents.OfType<AlertCreatedEvent>().Any());
+      Assert.Single(eventBus.PublishedEvents);
     }
 
     [Fact]

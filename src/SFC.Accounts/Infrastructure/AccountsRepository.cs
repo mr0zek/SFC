@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SFC.Accounts.Api;
-using SFC.Accounts.Features.AccountQuery;
-using SFC.Accounts.Features.CreateAccount;
+using SFC.Accounts.CreateAccount;
 
 namespace SFC.Accounts.Infrastructure
 {

@@ -35,17 +35,11 @@ namespace SFC
     {
       // Add framework services.
       services
-        .AddMvc(opt =>
-        {
-          // Enable fluent validation
-          opt.Filters.Add(typeof(FluentValidationActionFilter));
-        })
+        .AddMvc(opt => opt.Filters.Add(typeof(FluentValidationActionFilter)))
         .AddApplicationPart(typeof(AutofacUserApiModule).Assembly)
         .AddApplicationPart(typeof(AutofacAdminApiModule).Assembly)
         .AddControllersAsServices()
         .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-        
-        // Enable fluent validation
         .AddFluentValidation(fvc =>
         {
           fvc.RegisterValidatorsFromAssemblyContaining<AutofacUserApiModule>();
@@ -72,7 +66,6 @@ namespace SFC
         o.DefaultApiVersion = new ApiVersion(1, 0);
       });
 
-      // Ioc
       var builder = new ContainerBuilder();
       string connectionString = Configuration["ConnectionStrings:DefaultConnection"];
       builder.RegisterModule(new MainModule(connectionString));

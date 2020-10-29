@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using SFC.Notifications.SendNotification;
+using SFC.Notifications.Contract;
+using SFC.Notifications.Implementation.Features.SendNotification;
 
 namespace SFC.Tests.IntegrationTest.Mocks
 {

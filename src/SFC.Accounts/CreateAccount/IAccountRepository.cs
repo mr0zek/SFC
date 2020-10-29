@@ -1,4 +1,4 @@
-﻿namespace SFC.Accounts.Features.CreateAccount
+﻿namespace SFC.Accounts.CreateAccount
 {
   internal interface IAccountRepository
   {
